@@ -33,11 +33,11 @@ station sta;
 
 void Dijkstra(int n, int v, int *dist, int *prev, int c[maxnum][maxnum])
 {
-	bool s[maxnum];   
+	bool s[maxnum];
 	for (int i = 0; i < n; ++i)
 	{
 		dist[i] = c[v][i];
-		s[i] = 0;    
+		s[i] = 0;
 		if (dist[i] == MAX)
 			prev[i] = 0;
 		else
@@ -50,8 +50,8 @@ void Dijkstra(int n, int v, int *dist, int *prev, int c[maxnum][maxnum])
 		int tmp = MAX;
 		int u = v;
 		for (int j = 0; j < n; ++j) {
-			if ((!s[j]) && dist[j] < tmp){
-				u = j; 
+			if ((!s[j]) && dist[j] < tmp) {
+				u = j;
 				tmp = dist[j];
 			}
 		}
@@ -71,6 +71,7 @@ void Dijkstra(int n, int v, int *dist, int *prev, int c[maxnum][maxnum])
 void searchPath(int *prev, int v, int u)
 {
 	int que[maxnum];
+	int num;
 	int tot = 1;
 	char linename[30] = " ";
 	que[tot] = u;
@@ -83,6 +84,13 @@ void searchPath(int *prev, int v, int u)
 		tmp = prev[tmp];
 	}
 	que[tot] = v;
+	num = tot;
+	for (int i = tot; i > 1; --i) {
+		if (strcmp(bj.stas[que[i]].linename, bj.stas[que[i-1]].linename)){
+			num--;
+		}
+	}
+	cout << num << endl;
 	for (int i = tot; i >= 1; --i) {
 		if (!strcmp(linename, " ")) {
 			strcpy(linename, bj.stas[que[i]].linename);
